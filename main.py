@@ -2,7 +2,7 @@ import openai
 
 prompt = input("Enter A Number from 1-100 based on your current mood ")
 def generate_text(prompt):
-    openai.api_key = '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'
+    openai.api_key = 'sk-(not for public)'
     models = openai.Model.list()
     print(models.data[2].id)
     Chat_Completion = openai.ChatCompletion.create(
