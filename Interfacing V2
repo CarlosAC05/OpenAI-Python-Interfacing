@@ -15,7 +15,7 @@ else:
     Hrating =" very depressed"
     
 def generate_text(Arating,Hrating,context):
-    openai.api_key = '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'
+    openai.api_key = ''
     models = openai.Model.list()
     print(models.data[2].id)
     Chat_Completion = openai.ChatCompletion.create(
@@ -33,7 +33,7 @@ def generate_text(Arating,Hrating,context):
 
 response = generate_text(Arating,Hrating,context)
 def generate_text(response):
-    openai.api_key = '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'
+    openai.api_key = ''
     models = openai.Model.list()
     print(models.data[2].id)
     Chat_Completion = openai.ChatCompletion.create(
