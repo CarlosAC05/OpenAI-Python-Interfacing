@@ -1,0 +1,44 @@
+import openai
+import os
+import json
+key = os.environ.get('API_Key')
+openai.api_key_path="C:/Users/ccace/VSAI/KEY"
+
+openai.api_key = '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'
+mytraining=[("hello","how are you"),
+            ("I am Sad","thats sad"),]
+outitems=[]
+for item in mytraining:
+    out=repr({"prompt":item[0],"response":item[1]})
+    outitems.append(out)
+outstring="\n".join(outitems)
+
+create_args = {
+	"training_file": "C:/Users/ccace/VSAI/FineT1",
+	"validation_file": "C:/Users/ccace/VSAI/KEY",
+	"model": "davinci",
+	"n_epochs": 15,
+	"batch_size": 3,
+	"learning_rate_multiplier": 0.3
+}
+
+response = openai.FineTune.create(create_args)
+job_id = response["id"]
+status = response["status"]
+
+print(f'Fine-tunning model with jobID: {job_id}.')
+print(f"Training Response: {response}")
+print(f"Training Status: {status}")
+
+
+f=open("C:/Users/ccace/VSAI/FineT1","w+")
+f.write(outstring)
+f.close()
+f1=open("C:/Users/ccace/VSAI/KEY","w+")
+f1.write('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')
+f1.close()
+
+
+
+
+
