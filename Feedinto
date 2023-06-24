@@ -1,0 +1,92 @@
+import openai
+openai.api_key = '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'
+print(openai.Model.list())
+
+anger = input("rate your anger from 1-100 ")
+happiness =input("rate your happiness from 1-100")
+context = "pretend"
+c1 = ""
+pretender ="individual"
+if(int(anger)> 50):
+    Arating = "nervous"
+else:
+    Arating ="not nervous"
+
+if(int(happiness) > 50):
+    Hrating = "very happy"
+else:
+    Hrating =" very depressed"
+    
+def generate_text(Arating,Hrating,context):
+    openai.api_key = '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'
+    models = openai.Model.list()
+    print(models.data[2].id)
+    Chat_Completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+             {"role": "user", "content": "I am " + Arating + "." + " I am " + Hrating + "."},
+          #  {"role": "user", "content": (  )},
+            {"role": "system", "content": context + "write a one sentence  greeting to the person mentioned referencing their current mood."}
+                  ],
+        #messages= [],
+        temperature =.5,
+        max_tokens=100
+    )
+    print(Arating,Hrating,context)
+    print(Chat_Completion.choices[0].message.content)
+    return str(Chat_Completion.choices[0].message.content)
+
+response1 =generate_text(Arating,Hrating,context)
+    
+
+def generate_text(P):
+    openai.api_key = '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'
+    models = openai.Model.list()
+    print(models.data[0].id)
+    Chat_Completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=  [ #{"role": "user", "content": "I like to"+prompt }, 
+                    {"role": "user","content":(P+"write a sentence from the point of view of a depressed fish")}],
+        #messages= [],
+        temperature =1,
+        max_tokens=50
+    )
+    print(P)
+    print(Chat_Completion.choices[0].message.content)
+    return str(Chat_Completion.choices[0].message.content)
+    
+    
+
+response2= generate_text(c1)
+
+
+
+def generate_text(P1,P2):
+    openai.api_key = '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'
+    models = openai.Model.list()
+    print(models.data[2].id)
+    Chat_Completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=  [ 
+                     {"role":"user","content":P1},
+                     {"role":"user","content":P2},
+                    {"role": "user", "content":"what can you say about each sentence? " }],
+        #messages= [],
+        temperature =.5,
+        max_tokens=500
+    )
+    print(P1,P2)
+    print(Chat_Completion.choices[0].message.content)
+    #(Chat_Completion.choices[0].message.content)
+
+(generate_text(response2,response1))
+# Prompt the user for input
+
+
+
+
+
+
+
+#Goals: Create a more streamlined approach to an inpout and output given index scores
+#Make sure the emotional states can vary while still mantaining relevent response

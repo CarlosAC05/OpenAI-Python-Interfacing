@@ -1,0 +1,36 @@
+import openai
+Arating =input("what is your anger?")
+Hrating= input("what is your happiness?")
+def generate_text(messages, temperature =0, max_tokens=100):
+    openai.api_key = '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'
+    models = openai.Model.list()
+    print(models.data[2].id)
+    Chat_Completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=  messages,
+        temperature = temperature,
+        max_tokens= max_tokens
+    )
+    print("messages=",messages)
+    print("response = ", Chat_Completion.choices[0].message.content)
+    return str(Chat_Completion.choices[0].message.content)
+def generatemood(anger, happy,):
+    if (anger>10):
+       Amood ="furious"
+    else:
+       Amood="not annoyed"
+    if(happy>10):
+        Hmood ="ecstatic"
+    else:
+       Hmood ="sad"
+    mood ="I feel " + " and ".join([Amood,Hmood]) 
+    prompt=[{"role": "user","content": mood}]
+    generate_text(prompt,temperature=1, max_tokens=200)
+
+generatemood(int(Arating), int(Hrating))
+
+#prompt=[{"role": "user","content": "what is blue?"}]
+
+#result =generate_text(prompt,temperature=1,max_tokens=100) 
+#feedback= prompt + [{"role":"user","content":result}]
+#result2= generate_text(feedback, temperature=0,max_tokens=100)
